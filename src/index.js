@@ -19,15 +19,52 @@ const mathOperations = {
     }
 }
 
+function roundNumber (number) {
+    const allowedNumberOfCharacters = 15;
+
+    if (number % 1) {
+        number = "" + number;
+
+        if (number.length <= allowedNumberOfCharacters) {
+            return (+number);
+        } else {
+            let pointPosition = number.indexOf(".") + 1;
+            let numberOfCharactersAfterPoint = allowedNumberOfCharacters - pointPosition;
+            number = +number;
+            return +number.toFixed(numberOfCharactersAfterPoint);
+        }
+    } /* else {
+        number = "" + number;
+
+        if (number.length <= allowedNumberOfCharacters) {
+            return (+number);
+        } else {
+            if(number[0] === "-") {
+                return number.slice(0, allowedNumberOfCharacters - 5) + "E" + (number.length - (allowedNumberOfCharacters - 4));
+            } else {
+
+            }
+        }
+    } */
+
+    return number;
+}
+
 function getSquareRoot (a) {
-    return Math.sqrt(+a);
+    let result = Math.sqrt(+a);
+
+    return roundNumber(result);
 }
 
 function performOperation (a, b, operation) {
+    let result = 0;
+    
     a = +a;
     b = +b;
 
-    return mathOperations[operation](a, b);
+    result = mathOperations[operation](a, b);
+
+    return roundNumber(result);
 }
 
 
