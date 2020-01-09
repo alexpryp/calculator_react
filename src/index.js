@@ -31,23 +31,17 @@ function roundNumber (number) {
             let pointPosition = number.indexOf(".") + 1;
             let numberOfCharactersAfterPoint = allowedNumberOfCharacters - pointPosition;
             number = +number;
-            return +number.toFixed(numberOfCharactersAfterPoint);
+            return +(number.toFixed(numberOfCharactersAfterPoint));
         }
-    } /* else {
+    } else {
         number = "" + number;
 
         if (number.length <= allowedNumberOfCharacters) {
             return (+number);
         } else {
-            if(number[0] === "-") {
-                return number.slice(0, allowedNumberOfCharacters - 5) + "E" + (number.length - (allowedNumberOfCharacters - 4));
-            } else {
-
-            }
+            return number.slice(0, allowedNumberOfCharacters - 5) + "E+" + (number.length - (allowedNumberOfCharacters - 4));
         }
-    } */
-
-    return number;
+    }
 }
 
 function getSquareRoot (a) {
@@ -90,6 +84,11 @@ class Calculator extends React.Component {
         const attributesObj = target.attributes;
 
         if (attributesObj.hasOwnProperty("data-value")) {
+
+            if (this.state.value.length >= 15 && this.state.operator === "") {
+                return;
+            }
+
             const dataValue = attributesObj["data-value"]["value"];
 
             if (this.state.operatorEntered || this.state.resultDisplayed) {
@@ -166,9 +165,6 @@ class Calculator extends React.Component {
                 } else {
                     const result = performOperation(this.state.value, this.state.secondValue, this.state.operator);
 
-                    console.log(result);
-
-
                     this.setState((state) => ({
                         value: "" + result,
                         operator: "",
@@ -198,8 +194,6 @@ class Calculator extends React.Component {
                 }));
             }
         }
-
-        console.log(this.state);
     }
 
     render() {
