@@ -9,7 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: rgb(120, 120, 120) linear-gradient(rgb(160,160,170), rgb(20,20,50));
+  /* background: rgb(120, 120, 120) linear-gradient(rgb(160,160,170), rgb(20,20,50)); */
 }
 
 code {
@@ -25,6 +25,28 @@ code {
   border: 3px solid #777;
   border-radius: 10px;
   background-color: #000;
+}
+.indicator {
+  display: flex;
+  justify-content: space-between;
+}
+.battery {
+  display: flex;
+  margin: 15px 15px 10px 15px;
+  border: 1px solid #777;
+  border-radius: 0px;
+}
+.cell {
+  width: 25px;
+  height: 25px;
+  background-color: #444;
+  border: 1px solid #000;
+}
+.logo {
+  line-height: 2;
+  padding: 10px;
+  margin-right: 10px;
+  color: #fff;
 }
 .display {
   height: 70px;
@@ -74,7 +96,7 @@ button.dark-grey:hover {
   background: rgb(70, 70, 70) linear-gradient(rgb(15,15,15), rgb(40,40,50));
 }
 button.button-blue {
-  background: rgb(26, 99, 243) linear-gradient( rgb(46,119,273), rgb(00,69,223));
+  background: rgb(26, 99, 243) linear-gradient( rgb(46,119,255), rgb(00,69,223));
 }
 button.button-blue:hover {
   background: rgb(26, 99, 243) linear-gradient( rgb(00,19,173), rgb(00,69,223));

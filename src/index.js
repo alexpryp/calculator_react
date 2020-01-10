@@ -199,6 +199,15 @@ class Calculator extends React.Component {
     render() {
         return (
             <div className="calculator">
+                <div className="indicator">
+                    <div className="battery">
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                        <div className="cell"></div>
+                    </div>
+                    <div className="logo">CALCULATOR</div>
+                </div>
                 <div className="display">{this.state.value}</div>
                 <div className="buttons-panel" onClick={this.handleValue}>
                     <div className="buttons-row">
