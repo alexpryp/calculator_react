@@ -22,25 +22,28 @@ const mathOperations = {
 function roundNumber (number) {
     const allowedNumberOfCharacters = 15;
 
+    if (number.length <= allowedNumberOfCharacters) {
+        return (+number);
+    }
+
+    number = +number;
     if (number % 1) {
         number = "" + number;
+        let pointPosition = number.indexOf(".") + 1;
+        let numberOfCharactersAfterPoint = allowedNumberOfCharacters - pointPosition;
 
-        if (number.length <= allowedNumberOfCharacters) {
-            return (+number);
-        } else {
-            let pointPosition = number.indexOf(".") + 1;
-            let numberOfCharactersAfterPoint = allowedNumberOfCharacters - pointPosition;
-            number = +number;
-            return +(number.toFixed(numberOfCharactersAfterPoint));
+        if (numberOfCharactersAfterPoint < 0) {
+            numberOfCharactersAfterPoint = 0;
         }
+        number = +number;
+
+        console.log(number);
+        console.log(typeof number);
+        console.log(numberOfCharactersAfterPoint);
+        return +(number.toFixed(numberOfCharactersAfterPoint));
     } else {
         number = "" + number;
-
-        if (number.length <= allowedNumberOfCharacters) {
-            return (+number);
-        } else {
-            return number.slice(0, allowedNumberOfCharacters - 5) + "E+" + (number.length - (allowedNumberOfCharacters - 4));
-        }
+        return number.slice(0, allowedNumberOfCharacters - 5) + "E+" + (number.length - (allowedNumberOfCharacters - 4));
     }
 }
 
@@ -58,9 +61,8 @@ function performOperation (a, b, operation) {
 
     result = mathOperations[operation](a, b);
 
-    return roundNumber(result);
+    return roundNumber("" + result);
 }
-
 
 class Calculator extends React.Component {
     constructor(props) {
@@ -85,9 +87,9 @@ class Calculator extends React.Component {
 
         if (attributesObj.hasOwnProperty("data-value")) {
 
-            if (this.state.value.length >= 15 && this.state.operator === "") {
+            if (this.state.value.length >= 15) {
                 return;
-            }
+            };
 
             const dataValue = attributesObj["data-value"]["value"];
 
@@ -167,6 +169,7 @@ class Calculator extends React.Component {
 
                     this.setState((state) => ({
                         value: "" + result,
+                        secondValue: "",
                         operator: "",
                         float: false,
                         negative: false,
@@ -187,6 +190,7 @@ class Calculator extends React.Component {
             } else {
                 this.setState((state) => ({
                     secondValue: state.value,
+                    value: "0",
                     operator: dataOperator,
                     operatorEntered: true,
                     float: false,
