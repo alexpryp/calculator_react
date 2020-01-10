@@ -37,9 +37,6 @@ function roundNumber (number) {
         }
         number = +number;
 
-        console.log(number);
-        console.log(typeof number);
-        console.log(numberOfCharactersAfterPoint);
         return +(number.toFixed(numberOfCharactersAfterPoint));
     } else {
         number = "" + number;
