@@ -253,6 +253,8 @@ class Calculator extends React.Component {
                     onClick={this.handleValue} 
                     onMouseDown={this.handleMouseDown}
                     onMouseUp={this.handleMouseUp}
+                    onTouchStart={this.handleMouseDown}
+                    onTouchEnd={this.handleMouseUp}
                 >
                     <div className="buttons-row">
                         <button className="button-blue" data-operator="c">C</button>
