@@ -74,7 +74,49 @@ class Calculator extends React.Component {
             resultDisplayed: false,
         };
 
+        this.handleMouseDown = this.handleMouseDown.bind(this);
+        this.handleMouseUp = this.handleMouseUp.bind(this);
         this.handleValue = this.handleValue.bind(this);
+    }
+
+    // add button click effect
+    handleMouseDown(event) {
+        const target = event.target;
+        const attributesObj = target.attributes;
+
+        if (target.dataset.operator === "backspace") {
+            target.closest("button.backspace-button").classList.add("dark-grey-click");
+        } else if (attributesObj.hasOwnProperty("data-value")) {
+            target.classList.add("button-click"); 
+        } else if (attributesObj.hasOwnProperty("data-operator")) {
+            if (target.classList.contains("dark-grey")) {
+                target.classList.add("dark-grey-click");
+            } else if (target.classList.contains("button-blue")) {
+                target.classList.add("button-blue-click");
+            } else if (target.classList.contains("button-orange")) {
+                target.classList.add("button-orange-click");
+            }
+        }
+    }
+
+    // remove button click effect
+    handleMouseUp(event) {
+        const target = event.target;
+        const attributesObj = target.attributes;
+
+        if (target.dataset.operator === "backspace") {
+            target.closest("button.backspace-button").classList.remove("dark-grey-click");
+        } else if (attributesObj.hasOwnProperty("data-value")) {
+            target.classList.remove("button-click"); 
+        } else if (attributesObj.hasOwnProperty("data-operator")) {
+            if (target.classList.contains("dark-grey")) {
+                target.classList.remove("dark-grey-click");
+            } else if (target.classList.contains("button-blue")) {
+                target.classList.remove("button-blue-click");
+            } else if (target.classList.contains("button-orange")) {
+                target.classList.remove("button-orange-click");
+            }
+        }
     }
 
     handleValue(event) {
@@ -207,7 +249,11 @@ class Calculator extends React.Component {
                     <div className="logo">CALCULATOR</div>
                 </div>
                 <div className="display">{this.state.value}</div>
-                <div className="buttons-panel" onClick={this.handleValue}>
+                <div className="buttons-panel" 
+                    onClick={this.handleValue} 
+                    onMouseDown={this.handleMouseDown}
+                    onMouseUp={this.handleMouseUp}
+                >
                     <div className="buttons-row">
                         <button className="button-blue" data-operator="c">C</button>
                         <button className="dark-grey" data-operator="/">&#247;</button>
