@@ -70,7 +70,6 @@ class Calculator extends React.Component {
             operator: "",
             float: false,
             negative: false,
-            itsResult: false,
             operatorEntered: false,
             resultDisplayed: false,
         };
@@ -137,7 +136,6 @@ class Calculator extends React.Component {
                     operator: "",
                     float: false,
                     negative: false,
-                    itsResult: false,
                     operatorEntered: false,
                     resultDisplayed: false,
                 });
@@ -170,7 +168,6 @@ class Calculator extends React.Component {
                         operator: "",
                         float: false,
                         negative: false,
-                        itsResult: true,
                         operatorEntered: false,
                         resultDisplayed: true,
                     }));
