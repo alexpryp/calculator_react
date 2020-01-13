@@ -23,6 +23,7 @@ function roundNumber (number) {
     const allowedNumberOfCharacters = 15;
 
     if (number.length <= allowedNumberOfCharacters) {
+        console.log(number);
         return (+number);
     }
 
@@ -47,7 +48,10 @@ function roundNumber (number) {
 function getSquareRoot (a) {
     let result = Math.sqrt(+a);
 
-    return roundNumber(result);
+    console.log(result);
+    console.log(typeof result);
+
+    return roundNumber(''+result);
 }
 
 function performOperation (a, b, operation) {
