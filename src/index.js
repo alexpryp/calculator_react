@@ -1,69 +1,8 @@
 import React, {  } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import {getSquareRoot, performOperation} from './additFunctions.js';
 //import { throwStatement, forInStatement } from '@babel/types';
-
-
-const mathOperations = {
-    "/": function (a, b) {
-        return b / a;
-    },
-    "*": function (a, b) {
-        return b * a;
-    },
-    "-": function (a, b) {
-        return b - a;
-    },
-    "+": function (a, b) {
-        return b + a;
-    }
-}
-
-function roundNumber (number) {
-    const allowedNumberOfCharacters = 15;
-
-    if (number.length <= allowedNumberOfCharacters) {
-        console.log(number);
-        return (+number);
-    }
-
-    number = +number;
-    if (number % 1) {
-        number = "" + number;
-        let pointPosition = number.indexOf(".") + 1;
-        let numberOfCharactersAfterPoint = allowedNumberOfCharacters - pointPosition;
-
-        if (numberOfCharactersAfterPoint < 0) {
-            numberOfCharactersAfterPoint = 0;
-        }
-        number = +number;
-
-        return +(number.toFixed(numberOfCharactersAfterPoint));
-    } else {
-        number = "" + number;
-        return number.slice(0, allowedNumberOfCharacters - 5) + "E+" + (number.length - (allowedNumberOfCharacters - 4));
-    }
-}
-
-function getSquareRoot (a) {
-    let result = Math.sqrt(+a);
-
-    console.log(result);
-    console.log(typeof result);
-
-    return roundNumber(''+result);
-}
-
-function performOperation (a, b, operation) {
-    let result = 0;
-    
-    a = +a;
-    b = +b;
-
-    result = mathOperations[operation](a, b);
-
-    return roundNumber("" + result);
-}
 
 class Calculator extends React.Component {
     constructor(props) {
