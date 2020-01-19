@@ -83,10 +83,18 @@ class Calculator extends React.Component {
             }
 
             if (dataValue === "." && this.state.float === false) {
-                this.setState((state) => ({
-                    value: state.value + dataValue,
-                    float: true,
-                }));
+                this.setState((state) => {
+                    if (state.value == "-") {
+                        return {
+                            value: "-0.",
+                            float: true,
+                        };
+                    }
+                    return {
+                        value: state.value + dataValue,
+                        float: true,
+                    };
+                });
             } else if (dataValue === "." && this.state.float === true) {
                 return;
             } else if (dataValue === "-+" && this.state.negative === false) {
@@ -109,7 +117,11 @@ class Calculator extends React.Component {
             } else if (this.state.value === "0") {
                 this.setState({value: dataValue});
             } else {
-                this.setState((state) => ({value: state.value + dataValue}));
+                if (this.state.value === "-0") {
+                    this.setState((state) => ({value: "-" + dataValue}));
+                } else {
+                    this.setState((state) => ({value: state.value + dataValue}));
+                }
             }
         } else if (attributesObj.hasOwnProperty("data-operator")) {
             const dataOperator = attributesObj["data-operator"]["value"];
