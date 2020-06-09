@@ -76,15 +76,17 @@ class Calculator extends React.Component {
 
             if (this.state.operatorEntered || this.state.resultDisplayed) {
                 this.setState({
-                    value: "",
+                    value: "0",
                     operatorEntered: false,
-                    resultDisplayed: false
+                    resultDisplayed: false,
+                    float: false,
+                    negative: false
                 });
             }
 
             if (dataValue === "." && this.state.float === false) {
                 this.setState((state) => {
-                    if (state.value == "-") {
+                    if (state.value === "-") {
                         return {
                             value: "-0.",
                             float: true,

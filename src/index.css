@@ -4,6 +4,9 @@
 body {
   height: 100vh;
   min-height: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -21,7 +24,6 @@ code {
   display: flex;
   width: 320px;
   flex-direction: column;
-  margin: 50px auto;
   border: 3px solid #777;
   border-radius: 10px;
   background-color: #000;
