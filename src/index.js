@@ -9,7 +9,7 @@ class Calculator extends React.Component {
         super(props);
         this.state = {
             value: "0",
-            secondValue: "0",
+            secondValue: "",
             operator: "",
             float: false,
             negative: false,
@@ -122,7 +122,11 @@ class Calculator extends React.Component {
                 if (this.state.value === "-0") {
                     this.setState((state) => ({value: "-" + dataValue}));
                 } else {
-                    this.setState((state) => ({value: state.value + dataValue}));
+                    if (this.state.operatorEntered || this.state.resultDisplayed) {
+                        this.setState((state) => ({value: "" + dataValue}));
+                    } else {
+                        this.setState((state) => ({value: state.value + dataValue}));
+                    }
                 }
             }
         } else if (attributesObj.hasOwnProperty("data-operator")) {
@@ -131,7 +135,7 @@ class Calculator extends React.Component {
             if (dataOperator === "c") {
                 this.setState({
                     value: "0",
-                    secondValue: "0",
+                    secondValue: "",
                     operator: "",
                     float: false,
                     negative: false,
@@ -181,14 +185,28 @@ class Calculator extends React.Component {
                     resultDisplayed: true,
                 }));
             } else {
-                this.setState((state) => ({
-                    secondValue: state.value,
-                    value: "0",
-                    operator: dataOperator,
-                    operatorEntered: true,
-                    float: false,
-                    negative: false,
-                }));
+                if (this.state.secondValue !== "") {
+                    let result = performOperation(this.state.value, this.state.secondValue, this.state.operator);
+
+                    this.setState((state) => ({
+                        value: "" + result,
+                        secondValue: "" + result,
+                        operator: dataOperator,
+                        float: false,
+                        negative: false,
+                        operatorEntered: true,
+                        resultDisplayed: false,
+                    }));
+                } else {
+                    this.setState((state) => ({
+                        secondValue: state.value,
+                        value: "0",
+                        operator: dataOperator,
+                        operatorEntered: true,
+                        float: false,
+                        negative: false,
+                    }));
+                }
             }
         }
     }
@@ -250,4 +268,3 @@ class Calculator extends React.Component {
 }
 
 ReactDOM.render(<Calculator />, document.getElementById('root'));
-
